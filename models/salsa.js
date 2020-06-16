@@ -4,6 +4,7 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING
   }, {});
   salsa.associate = function(models) {
+    salsa.hasMany(models.mealComposition);
     // associations can be defined here
   };
   return salsa;

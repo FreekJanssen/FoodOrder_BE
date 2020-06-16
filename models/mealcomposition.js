@@ -4,6 +4,9 @@ module.exports = (sequelize, DataTypes) => {
     id: DataTypes.INTEGER
   }, {});
   mealComposition.associate = function(models) {
+    mealComposition.belongsTo(models.meal)
+    mealComposition.belongsTo(models.filling)
+    mealComposition.belongsTo(models.salsa)
     // associations can be defined here
   };
   return mealComposition;

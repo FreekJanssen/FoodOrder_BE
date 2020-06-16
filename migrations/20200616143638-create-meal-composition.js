@@ -7,6 +7,36 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
+      },      
+      mealId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: "meals",
+          key: "id",
+        },
+        onUpdate: "CASCADE",
+        onDelete: "SET NULL",
+      },
+      fillingId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: "fillings",
+          key: "id",
+        },
+        onUpdate: "CASCADE",
+        onDelete: "SET NULL",
+      },
+      salsaId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: "salsas",
+          key: "id",
+        },
+        onUpdate: "CASCADE",
+        onDelete: "SET NULL",
       },
       createdAt: {
         allowNull: false,

@@ -4,6 +4,7 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING
   }, {});
   filling.associate = function(models) {
+    filling.hasMany(models.mealComposition)
     // associations can be defined here
   };
   return filling;
