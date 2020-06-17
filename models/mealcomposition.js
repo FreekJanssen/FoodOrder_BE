@@ -1,7 +1,6 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const mealComposition = sequelize.define('mealComposition', {
-    id: DataTypes.INTEGER,
     orderId: DataTypes.INTEGER,
     fillingId: DataTypes.INTEGER,
     salsaId: DataTypes. INTEGER,
