@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
     mealComposition.belongsTo(models.filling)
     mealComposition.belongsTo(models.salsa)
     mealComposition.belongsTo(models.order)
+    mealComposition.belongsToMany(models.topping, { through: 'mealToppings' });
     // associations can be defined here
   };
   return mealComposition;
