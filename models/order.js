@@ -9,6 +9,7 @@ module.exports = (sequelize, DataTypes) => {
     completed: DataTypes.BOOLEAN
   }, {});
   order.associate = function(models) {
+    order.hasMany(models.mealComposition)
     // associations can be defined here
   };
   return order;
