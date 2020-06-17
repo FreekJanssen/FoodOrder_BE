@@ -15,6 +15,48 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date()
       },
+      {
+        mealCompositionId: 2,
+        toppingId: 1,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        mealCompositionId: 2,
+        toppingId: 3,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        mealCompositionId: 2,
+        toppingId: 7,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        mealCompositionId: 3,
+        toppingId: 1,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        mealCompositionId: 3,
+        toppingId: 6,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        mealCompositionId: 5,
+        toppingId: 2,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        mealCompositionId: 5,
+        toppingId: 6,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      }
     ], {});
   },
 
