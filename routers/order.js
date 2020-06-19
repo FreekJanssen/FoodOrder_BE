@@ -28,14 +28,14 @@ router.post('/', async (req,res,next) => {
         fillingId,
         salsaId
       });
-/*       const { id: mealCompositionId } = newMealComposition;
+      const { id: mealCompositionId } = newMealComposition;
       toppings.forEach(async (topping) => {
         const newMealTopping = await mealTopping.create({
           toppingId: topping,
           mealCompositionId
         });
         console.log(newMealTopping);
-      }); */
+      });
     });
 
 	}catch(e){
