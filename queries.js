@@ -7,7 +7,7 @@ async function get () {
 }
 //get();
 async function getMealAndToppings () {
-    const mealcomp1 = await mealComposition.findByPk(1, {include: [meal, filling, topping, salsa] })
+    const mealcomp1 = await mealComposition.findByPk(6, {include: [meal, filling, topping, salsa] })
     console.log(mealcomp1.get({plain:true}))
     
 }
