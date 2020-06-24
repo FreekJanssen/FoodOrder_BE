@@ -1,7 +1,8 @@
 const { Router } = require("express");
-const { mealTopping, mealComposition, order } = require("../models");
+const { mealTopping, mealComposition, order, topping, salsa, meal, filling } = require("../models");
 
 const router = new Router();
+let clients = [];
 
 router.post('/', async (req,res,next) => {
   
@@ -20,27 +21,61 @@ router.post('/', async (req,res,next) => {
     });
     const { id: orderId } = newOrder;
 
-    mealCompositions.forEach(async (meal) => {
+    await Promise.all(mealCompositions.map(async (meal) => {
       const { meal: mealId, filling: fillingId, salsa: salsaId, toppings } = meal;
       const newMealComposition = await mealComposition.create({
         orderId,
         mealId,
         fillingId,
         salsaId
-      });
+      });      
       const { id: mealCompositionId } = newMealComposition;
-      toppings.forEach(async (topping) => {
+      await Promise.all(toppings.map(async (topping) => {
         const newMealTopping = await mealTopping.create({
           toppingId: topping,
           mealCompositionId
         });
-        console.log(newMealTopping);
-      });
-    });
-
+        return newMealTopping;
+      }));
+      return newMealComposition;
+    }));
+    const fullNewOrder = await order.findByPk(orderId, { include: { model: mealComposition, include: [meal,filling,salsa, topping] } });
+    const orderArray = [fullNewOrder];
+    const data = `data: ${JSON.stringify(orderArray)}\n\n`;
+    clients.forEach(c => c.res.write(data));
 	}catch(e){
 		res.send(e);
 	};
+});
+
+router.get('/', async (req, res, next) => {
+   
+  const headers = {
+    'Content-Type': 'text/event-stream',
+    'Connection': 'keep-alive',
+    'Cache-Control': 'no-cache'
+  };
+  res.set(headers);
+  const uncompletedOrders = await order.findAll({ where: { completed: false }, include: { model: mealComposition, include: [meal,filling,salsa,topping] } });
+  const data = `data: ${JSON.stringify(uncompletedOrders)}\n\n`
+  res.write(data);
+  const keepAlive = 60 * 1000;
+  setInterval(() => res.write(':\n\n'), keepAlive);
+    // Generate an id based on timestamp and save res
+    // object of client connection on clients list
+    // Later we'll iterate it and send updates to each client
+  const clientId = Date.now();
+  const newClient = {
+    id: clientId,
+    res
+  };
+  clients.push(newClient);
+    // When client closes connection we update the clients list
+    // avoiding the disconnected one
+  req.on('close', () => {
+    console.log(`${clientId} Connection closed`);
+    clients = clients.filter(c => c.id !== clientId);
+  });
 });
 
 module.exports = router;
