@@ -41,7 +41,6 @@ router.post('/', async (req,res,next) => {
     }));
     const fullNewOrder = await order.findByPk(orderId, { include: { model: mealComposition, include: [meal,filling,salsa, topping] } });
     const orderArray = [fullNewOrder];
-    console.log('ORDER ARRAY executes now');
     const data = `data: ${JSON.stringify(orderArray)}\n\n`;
     clients.forEach(c => c.res.write(data));
 	}catch(e){
