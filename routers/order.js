@@ -78,4 +78,16 @@ router.get('/', async (req, res, next) => {
   });
 });
 
+router.patch('/:id/done', async(req, res) => {
+  const { id } = req.params;
+  
+  try{
+    const orderToUpdate = await order.findByPk(id);
+    await orderToUpdate.update({ completed: true });
+    res.send({message: 'Success'});
+  }catch(e){
+    res.send(e);
+  };
+});
+
 module.exports = router;
