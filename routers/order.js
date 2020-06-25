@@ -43,6 +43,7 @@ router.post('/', async (req,res,next) => {
     const orderArray = [fullNewOrder];
     const data = `data: ${JSON.stringify(orderArray)}\n\n`;
     clients.forEach(c => c.res.write(data));
+    res.send({message: 'success'});
 	}catch(e){
 		res.send(e);
 	};
