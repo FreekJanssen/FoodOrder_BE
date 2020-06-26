@@ -3,7 +3,7 @@ module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert('orders', [
       {
-        customerPhone: 612345678,
+        customerPhone: '0612345678',
         customerAddress: 'Hoofdstraat 12',
         delivery: true,
         comment: 'kloppen want de bel doet het niet',
@@ -13,7 +13,7 @@ module.exports = {
         updatedAt: new Date()
       },
       {
-        customerPhone: 699999999,
+        customerPhone: '0699999999',
         customerAddress: 'Parklaan 29B',
         delivery: true,
         comment: 'kloppen want de bel doet het niet',

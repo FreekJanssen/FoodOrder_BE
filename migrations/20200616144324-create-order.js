@@ -10,7 +10,7 @@ module.exports = {
       },
       customerPhone: {
         allowNull: false,
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       },
       customerAddress: {
         allowNull: true,
@@ -18,7 +18,7 @@ module.exports = {
       },
       delivery: {
         allowNull: false,
-        defaultValue: false,
+        defaultValue: true,
         type: Sequelize.BOOLEAN
       },
       comment: {
@@ -27,7 +27,7 @@ module.exports = {
       },
       totalPrice: {
         allowNull: false,
-        type: Sequelize.INTEGER
+        type: Sequelize.FLOAT
       },
       completed: {
         allowNull: false,
